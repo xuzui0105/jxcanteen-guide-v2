@@ -4,6 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <!-- iOS 沉浸式状态栏配置 -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="theme-color" content="#FAFAFA">
+    
     <title>聚芯食堂指南</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;900&display=swap" rel="stylesheet">
@@ -13,18 +18,21 @@
             --mcd-yellow: #FFBC0D;
             --mcd-red: #DA291C;
         }
+        html, body {
+            background-color: #FAFAFA; /* 确保 html 层级也有背景色 */
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
         body {
             font-family: 'Nunito', sans-serif;
             -webkit-tap-highlight-color: transparent;
-            /* 适配刘海屏和底部虚拟按键 */
-            padding-top: env(safe-area-inset-top);
-            background-color: #FAFAFA;
             user-select: none;
+            /* 移除 padding-top: env(safe-area-inset-top)，改由 Header 处理 */
         }
         .safe-bottom {
             padding-bottom: calc(1rem + env(safe-area-inset-bottom));
         }
-        /* 隐藏滚动条但保留功能 */
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
@@ -32,9 +40,8 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        /* 适配不同屏幕高度的容器 */
         .main-container {
-            min-height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+            min-height: 100vh;
         }
     </style>
 <script type="importmap">

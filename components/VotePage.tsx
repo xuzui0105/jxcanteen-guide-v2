@@ -133,6 +133,15 @@ const VotePage: React.FC<VotePageProps> = ({ userId, onEditVote }) => {
     }
   };
 
+  // 获取排名的颜色样式
+  const getRankBadgeClass = (index: number) => {
+    // 前六名全部统一为黄色背景黑色文字
+    if (index < 6) {
+      return 'bg-[#FFBC0D] text-black';
+    }
+    return 'bg-gray-100 text-gray-400';
+  };
+
   return (
     <div className="container mx-auto px-5 py-5 max-w-md pb-10">
       <div className="flex justify-between items-center mb-6">
@@ -177,9 +186,7 @@ const VotePage: React.FC<VotePageProps> = ({ userId, onEditVote }) => {
                         dish.myVote !== 0 ? 'border-[#FFBC0D] ring-1 ring-[#FFBC0D]/20' : 'border-gray-50'
                       }`}
                     >
-                      <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-black text-xs ${
-                        index === 0 ? 'bg-[#FFBC0D] text-black' : 'bg-gray-100 text-gray-400'
-                      }`}>
+                      <div className={`w-7 h-7 rounded-lg flex items-center justify-center font-black text-xs ${getRankBadgeClass(index)}`}>
                         {index + 1}
                       </div>
                       <div className="flex-1 font-black text-base text-[#292929] truncate">{dish.name}</div>

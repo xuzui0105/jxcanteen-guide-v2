@@ -3,7 +3,7 @@ import React from 'react';
 
 const Header: React.FC = () => {
   return (
-    <header className="bg-white px-5 py-4 sticky top-0 z-50 shadow-sm flex justify-between items-center">
+    <header className="bg-white px-5 sticky top-0 z-50 shadow-sm flex justify-between items-center transition-all" style={{ paddingTop: 'calc(15px + env(safe-area-inset-top))', paddingBottom: '15px' }}>
       <div className="flex items-center gap-2 font-black text-xl">
         <i className="fas fa-bowl-food text-[#FFBC0D] text-2xl"></i>
         <span>聚芯食堂指南</span>

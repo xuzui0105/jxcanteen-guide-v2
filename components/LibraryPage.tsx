@@ -92,10 +92,10 @@ const LibraryPage: React.FC<LibraryPageProps> = ({ onEditLibrary }) => {
                         <div className="font-black text-base text-[#292929] truncate leading-tight">{dish.name}</div>
                         <div className="flex gap-4 text-[10px] font-extrabold mt-1.5 uppercase tracking-tighter">
                           <span className="text-[#FFBC0D] flex items-center gap-1 bg-[#FFF8E1] px-1.5 py-0.5 rounded-md">
-                            <i className="fas fa-thumbs-up"></i> 累计 {likes}
+                            <i className="fas fa-thumbs-up"></i> {likes}
                           </span>
                           <span className="text-[#DA291C] flex items-center gap-1 bg-[#FFEBEE] px-1.5 py-0.5 rounded-md">
-                            <i className="fas fa-thumbs-down"></i> 累计 {dislikes}
+                            <i className="fas fa-thumbs-down"></i> {dislikes}
                           </span>
                         </div>
                       </div>
