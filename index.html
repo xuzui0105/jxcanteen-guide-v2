@@ -3,11 +3,15 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <!-- iOS 沉浸式状态栏配置 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+    
+    <!-- iOS 沉浸式全屏核心配置 -->
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <meta name="theme-color" content="#FAFAFA">
+    <meta name="apple-touch-fullscreen" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    
+    <!-- Safari 状态栏颜色同步 -->
+    <meta name="theme-color" content="#FFFFFF">
     
     <title>聚芯食堂指南</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -18,21 +22,25 @@
             --mcd-yellow: #FFBC0D;
             --mcd-red: #DA291C;
         }
+        
+        /* 强制背景为白色，确保填充刘海屏区域 */
         html, body {
-            background-color: #FAFAFA; /* 确保 html 层级也有背景色 */
+            background-color: #ffffff !important;
             margin: 0;
             padding: 0;
             height: 100%;
+            overflow-x: hidden;
         }
+
         body {
             font-family: 'Nunito', sans-serif;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
-            /* 移除 padding-top: env(safe-area-inset-top)，改由 Header 处理 */
+            min-height: 100%;
+            /* 底部留出安全距离，防止被底部小黑条遮挡 */
+            padding-bottom: env(safe-area-inset-bottom);
         }
-        .safe-bottom {
-            padding-bottom: calc(1rem + env(safe-area-inset-bottom));
-        }
+
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
@@ -40,8 +48,13 @@
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
-        .main-container {
+        
+        /* 内容容器背景 */
+        #root {
             min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #FAFAFA;
         }
     </style>
 <script type="importmap">
@@ -55,7 +68,7 @@
 </script>
 <link rel="stylesheet" href="/index.css">
 </head>
-<body class="bg-[#FAFAFA] text-[#292929]">
+<body class="text-[#292929]">
     <div id="root"></div>
 <script type="module" src="/index.tsx"></script>
 </body>
