@@ -39,9 +39,9 @@ const HomePage: React.FC<HomePageProps> = ({ onEditMenu }) => {
 
   const getWeekRangeText = (weekId: string) => {
     const monday = getDateOfISOWeek(weekId);
-    const saturday = new Date(monday);
-    saturday.setDate(monday.getDate() + 5); // Display range Mon - Sat
-    return `${monday.getFullYear()}（${fmtDateRange(monday)}-${fmtDateRange(saturday)}周）`;
+    const sunday = new Date(monday);
+    sunday.setDate(monday.getDate() + 6); // 修改为显示周一至周日的范围
+    return `${monday.getFullYear()}（${fmtDateRange(monday)}-${fmtDateRange(sunday)}周）`;
   };
 
   const today = new Date();
@@ -115,7 +115,8 @@ const HomePage: React.FC<HomePageProps> = ({ onEditMenu }) => {
              该时间段暂无菜单数据
           </div>
         ) : (
-          ['周一', '周二', '周三', '周四', '周五', '周六'].map((day, idx) => {
+          // 这里补全了“周日”的渲染
+          ['周一', '周二', '周三', '周四', '周五', '周六', '周日'].map((day, idx) => {
             const dayMenu = menuData[idx];
             if (!dayMenu) return null;
             

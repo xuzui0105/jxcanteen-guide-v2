@@ -81,32 +81,6 @@ const RecipePage: React.FC<RecipePageProps> = ({ userId, isAdmin }) => {
     }
   };
 
-  // 管理员专用：清空所有食谱
-  const handleClearAllRecipes = async () => {
-    if (!confirm("警告：确定要彻底清空数据库中所有的菜谱分享吗？此操作不可撤销。")) return;
-    setSaving(true);
-    try {
-      const [allR, allS] = await Promise.all([
-        lc.lcQuery<Recipe>("Recipe", {}, "limit=1000"),
-        lc.lcQuery<RecipeSupport>("RecipeSupport", {}, "limit=1000")
-      ]);
-      
-      const delPromises = [
-        ...allR.map(r => lc.lcDelete("Recipe", r.objectId!)),
-        ...allS.map(s => lc.lcDelete("RecipeSupport", s.objectId!))
-      ];
-      
-      await Promise.all(delPromises);
-      alert("所有菜谱数据已清空。");
-      fetchData();
-    } catch (err) {
-      console.error("Clear failed:", err);
-      alert("操作失败");
-    } finally {
-      setSaving(false);
-    }
-  };
-
   const handleUploadSubmit = async () => {
     if (!dishName.trim()) return alert("请输入菜品名称");
     const validIngredients = ingredients.filter(i => i.name.trim());
@@ -166,17 +140,6 @@ const RecipePage: React.FC<RecipePageProps> = ({ userId, isAdmin }) => {
           <i className="fas fa-plus-circle"></i>
           上传菜谱
         </button>
-        
-        {isAdmin && (
-          <button 
-            onClick={handleClearAllRecipes}
-            disabled={saving}
-            className="w-full bg-white text-[#DA291C] border border-[#DA291C]/20 py-2 rounded-xl font-bold text-xs flex items-center justify-center gap-2 active:bg-red-50"
-          >
-            <i className="fas fa-trash-alt"></i>
-            {saving ? '正在清空...' : '管理员：清空所有菜谱数据'}
-          </button>
-        )}
       </div>
 
       {loading ? (
